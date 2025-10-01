@@ -1,13 +1,17 @@
+import bcryptjs from "bcryptjs";
 import { JwtPayload } from "jsonwebtoken";
 import AppError from "../../errorHelpers/AppError";
 import { IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status-codes";
+import { envVars } from "../../config/env";
 const createUser = async (payload: Partial<IUser>) => {
-    const {name, email} = payload;
+    const {email, password, ...rest} = payload;
+     const hashedPassword = await bcryptjs.hash(password as string, Number(envVars.BCRYPT_SALT_ROUND))
     const user = await User.create({
-        name,
-        email
+        email,
+        password:hashedPassword,
+        rest
     })
     return user
 }

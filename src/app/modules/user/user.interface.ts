@@ -22,10 +22,10 @@ export enum IsActive {
 
 export interface IUser {
   _id?: string;
-  name: string;
+  name?: string;
   email: string;
   phone?: string;
-  password?: string;
+  password: string;
   picture?: string;
   address?: string;
   role: Role;
