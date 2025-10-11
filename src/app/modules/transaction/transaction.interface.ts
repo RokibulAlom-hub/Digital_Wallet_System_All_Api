@@ -3,7 +3,8 @@ import { Types } from "mongoose";
 export enum PayStatus {
     PENDING = 'PENDING',
     COMPLETED = 'COMPLETED',
-    FAILED = 'FAILED'
+    FAILED = 'FAILED',
+      REVERSED = "REVERSED",
 }
 
 export enum InitiatedBy {
@@ -23,6 +24,7 @@ export interface ITransaction {
     senderId?:Types.ObjectId;
     receiverId?:Types.ObjectId;
     walletId:Types.ObjectId;
+    wallet: Types.ObjectId;
     initiateBy:InitiatedBy;
     fee?:number;
     commission:number;
